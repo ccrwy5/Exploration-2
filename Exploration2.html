@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8"/>
+		<title>Exploration 2</title>
+
+		<link href="http://fonts.googleapis.com/css?family=Cookie|Open+Sans:400,700" rel="stylesheet" />
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.0.5/angular.min.js"></script>
+        <script src="assets/js/script.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+		<script src="script.js"></script>
+        
+        <script>
+        
+            function OrderFormController($scope){
+
+                $scope.services = [
+                    {
+                        name: 'Bottled Water - 16oz bottle of Aquafina',
+                        price: 4,
+                        active:false
+                    },{
+                        name: 'Hot Coffee - 12oz cup (Customize below)',
+                        price: 5,
+                        active:false
+                    },{
+                        name: 'Iced Coffee - 12oz cup (Customize below)',
+                        price: 5,
+                        active:false
+                    },{
+                        name: 'Glazed Donut - Hand-made in store every morning!',
+                        price: 6,
+                        active:false
+                    },{
+                        name: 'Fresh Bagel - Hand-made in store every monring!',
+                        price: 5,
+                        active: false
+                        
+                    }
+                ];
+
+                $scope.toggleActive = function(s){
+                    s.active = !s.active;
+                };
+
+
+                $scope.total = function(){
+
+                    var total = 0;
+                    angular.forEach($scope.services, function(s){
+                        if (s.active){
+                            total+= s.price;
+                        }
+                    });
+
+                    return total;
+                };
+            }
+            
+            
+            var app = angular.module("myNoteApp", []); 
+                app.controller("myNoteCtrl", function($scope) {
+                $scope.message = "";
+                $scope.left = function() {
+                    return 100 - $scope.message.length;
+                };
+                $scope.clear = function() {
+                    $scope.message = "";
+                };
+                $scope.save = function() {
+                    alert("Note Saved");
+                };
+        });
+        
+        function alertBox() {
+            alert("Your pre-order has been placed! \n\n It should be ready in approx. 5 minutes!");
+        }
+            
+    </script>
+        
+        
+        <style>
+                *{
+                    margin:0;
+                    padding:0;
+                }
+
+                body{
+                    font: sans-serif;
+                    color: #5e5b64;
+                    text-align:center;
+                        margin-top: -77px;
+                }
+
+                a, a:visited {
+                    outline:none;
+                    color:#389dc1;
+                    
+                }
+
+                a:hover{
+                    text-decoration:none;
+                }
+
+                section, footer, header, aside, nav{
+                    display: block;
+                }
+
+                form{
+                    /*background-color: #61a1bc; */
+                    background-color: skyblue;
+                    border-radius: 2px;
+                    box-shadow: 0 1px 1px #ccc;
+                    width: 90%;
+                    padding: 35px 60px;
+                    margin: 80px auto;
+                }
+
+                form ul{
+                    list-style:none;
+                    color:#fff;
+                    font-size:20px;
+                    font-weight:bold;
+                    text-align: left;
+/*                    margin:20px 0 15px;*/
+                }
+
+                form ul li{
+                    padding:20px 30px;
+                    background-color:red;
+                    margin-bottom:8px;
+                    box-shadow:0 1px 1px rgba(0,0,0,0.1);
+                    cursor:pointer;
+                }
+
+                form ul li span{
+                    float:right;
+                }
+
+                form ul li.active{
+                    background-color:green;
+                }
+
+                div.total{
+                    border-top:1px solid rgba(1,1,1,0.5);
+                    padding:15px 30px;
+                    font-size:20px;
+                    font-weight:bold;
+                    text-align: left;
+                    color:#fff;
+                }
+
+                div.total span{
+                    float:right;
+                }
+
+        </style>
+        
+        
+	
+    </head>
+
+	<body ng-app ng-controller="OrderFormController">
+
+        
+		<form>
+            <h1>Exploration 1</h1>
+            <h2>Chris Rehagen</h2>
+			<h3> </h3>
+            <h3>Online Cafe Pre-Order</h3>
+
+			<ul>
+				
+				<li ng-repeat="service in services" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+					{{service.name}} <span>{{service.price | currency}}</span>
+				</li>
+			</ul>
+
+			<div class="total">
+				Total: <span>{{total() | currency}}</span>
+			</div>
+
+		</form>
+        
+        
+        
+        <h3>Additional Order Instructions:</h3>
+        <textarea ng-model="message" cols="100" rows="10" placeholder="Add extra instructions! Example: Extra sugar, light ice, etc."></textarea>
+
+        <p>   
+        <button onclick="alertBox()" style="width: 100px">Submit</button>
+        </p> 
+
+		
+	</body>
+</html>
+
+    
+        
+        
+
